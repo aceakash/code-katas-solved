@@ -3,12 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	count(67)
+	nums := count(67)
+	for _, num := range nums {
+		fmt.Println(num)
+	}
 }
 
-func count(num int) {
+func count(num int) []int {
+	nums := []int{}
 	for num != 1 {
-		fmt.Println(num)
+		nums = append(nums, num)
 		if num%3 == 0 {
 			num = num / 3
 			continue
@@ -21,5 +25,6 @@ func count(num int) {
 		num += 1
 		num = num / 3
 	}
-	fmt.Println(num)
+	nums = append(nums, num)
+	return nums
 }
