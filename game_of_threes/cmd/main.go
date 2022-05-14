@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"go-katas/game_of_threes"
+	"math"
 )
 
 func main() {
-	nums := game_of_threes.Count(76543)
-	for _, num := range nums {
+	res := game_of_threes.Count(math.MaxInt64)
+	for _, num := range res {
 		fmt.Println(num)
 	}
 }

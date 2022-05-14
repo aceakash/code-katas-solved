@@ -25,5 +25,4 @@ func TestCount(t *testing.T) {
 			assert.Equal(t, td.want, game_of_threes.Count(td.num))
 		})
 	}
-
 }

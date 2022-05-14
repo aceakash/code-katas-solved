@@ -1,19 +1,19 @@
 package game_of_threes
 
 func Count(num int) []int {
-	nums := []int{num}
-	for num != 1 {
-		if num%3 == 2 {
-			num += 1
-			nums = append(nums, num)
-		}
-		if num%3 == 1 {
-			num -= 1
-			nums = append(nums, num)
-		}
-		num = num / 3
-		nums = append(nums, num)
-		continue
+	if num == 1 {
+		return []int{1}
 	}
-	return nums
+	next := nextNumber(num)
+	return append([]int{num}, Count(next)...)
+}
+
+func nextNumber(num int) (next int) {
+	if num%3 == 2 {
+		return num + 1
+	}
+	if num%3 == 1 {
+		return num - 1
+	}
+	return num / 3
 }
