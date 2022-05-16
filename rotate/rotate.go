@@ -8,11 +8,8 @@ func Rotate(list []int, by int) []int {
 		return list
 	}
 
-	newList := make([]int, len(list))
-	for i := 0; i < len(list); i++ {
-		newList[i] = list[(i+by)%len(list)]
-	}
-	return newList
+	by = by % len(list)
+	return append(list[by:], list[:by]...)
 }
 
 func RotateInPlace(list []int, by int) {
@@ -24,11 +21,11 @@ func RotateInPlace(list []int, by int) {
 	}
 
 	for i := 0; i < by; i++ {
-		rotateByOne(list)
+		rotateInPlaceByOne(list)
 	}
 }
 
-func rotateByOne(list []int) {
+func rotateInPlaceByOne(list []int) {
 	temp := list[0]
 	for i := 0; i < len(list)-1; i++ {
 		list[i] = list[i+1]
