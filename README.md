@@ -1,10 +1,10 @@
-# Go Katas
+# Code katas
 
-## Run tests for all katas
+## Run tests for all Go katas
 
 `go test ./...`
 
-## Run program for a kata in package xyz
+## Run program for a Go kata in package xyz
 
 `go run xyz/cmd/main.go`
 
