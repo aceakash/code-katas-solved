@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/big"
+)
 
 func FibRecursive(n int, knownFibs map[int]int) int {
 	if f, ok := knownFibs[n]; ok {
@@ -41,7 +44,30 @@ func FibIterative(n int) int {
 		}
 		a, b = b, c
 	}
-
 	return b
+}
 
+func FibBig(n int) string {
+	if n == 0 {
+		return "0"
+	}
+	if n == 1 {
+		return "1"
+	}
+	a := big.NewInt(0)
+	b := big.NewInt(1)
+
+	// Initialize limit as 10^100
+	var limit big.Int
+	limit.Exp(big.NewInt(10), big.NewInt(100), nil)
+
+	for i := 2; i <= n; i++ {
+		a.Add(a, b)
+		if a.Cmp(&limit) > 0 {
+			msg := fmt.Sprintf("encountered fib sequence number %s (#%d) which is over the configured limit of %s", a.String(), i, limit.String())
+			panic(msg)
+		}
+		a, b = b, a
+	}
+	return b.String()
 }

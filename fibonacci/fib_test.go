@@ -44,6 +44,17 @@ func Test_FibIterative_Can_Compute_The_Nth_Fibonacci_Number(t *testing.T) {
 	})
 }
 
+func TestFibBig(t *testing.T) {
+	assert.Equal(t, "0", FibBig(0))
+	assert.Equal(t, "1", FibBig(1))
+	assert.Equal(t, "1", FibBig(2))
+	assert.Equal(t, "2", FibBig(3))
+	assert.Equal(t, "3", FibBig(4))
+	assert.Equal(t, "610", FibBig(15))
+	assert.Equal(t, "12200160415121876738", FibBig(93))
+	assert.Equal(t, "9216845717656874712980450562726202415567360565980794777111390850331644813674856981646960226192287360", FibBig(480))
+}
+
 func BenchmarkFibRecursive(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		knownFibs := map[int]int{}
@@ -54,6 +65,14 @@ func BenchmarkFibRecursive(b *testing.B) {
 }
 
 func BenchmarkFibIterative(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for n := 0; n <= 92; n++ {
+			FibIterative(n)
+		}
+	}
+}
+
+func BenchmarkFibBig(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for n := 0; n <= 92; n++ {
 			FibIterative(n)
