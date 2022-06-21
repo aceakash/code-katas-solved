@@ -5,20 +5,21 @@ import (
 )
 
 func IsBalanced(expr string) bool {
-	s := stack.New[rune](1000)
+	capacity := len(expr)/2 + 1
+	s := stack.New[rune](capacity)
 
 	for _, r := range expr {
-		if isOpener(r) {
-			ok := s.Push(r)
-			if !ok {
-				panic("stack over capacity")
-			}
+		if !isOpener(r) && !isCloser(r) {
+			return false
 		}
-		if isCloser(r) {
-			popped, ok := s.Pop()
-			if !ok || popped != openerFor(r) {
-				return false
-			}
+		if isOpener(r) {
+			s.Push(r)
+			continue
+		}
+		// is closer
+		popped, couldPop := s.Pop()
+		if popped != openerFor(r) || !couldPop {
+			return false
 		}
 	}
 	return s.IsEmpty()
